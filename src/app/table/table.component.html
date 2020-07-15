@@ -1,0 +1,83 @@
+<div class="wrapper">
+    <table class="table table-striped table-bordered main-table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" *ngFor="let iter of keysArray$ | async">{{ iter }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let iter of insert$ | async" [ngClass]="{
+            'table-primary': iter.id === (choosen$ | async)
+          }" (click)="(chooseOne(iter.id))">
+            <th scope="row">{{ iter.id }}</th>
+            <td *ngIf="(keysArray$ | async)[0] !== undefined"><a *ngIf="iter[(keysArray$ | async)[0]] !== '' && (editingOne$ | async) !== iter.id; else insertProp1" >{{ iter[(keysArray$ | async)[0]] }}</a></td>
+                  <ng-template #insertProp1>
+                    <input [ngClass]="{'invalid': firstInput === '' || firstInput === undefined}" id="input1" required placeholder="Введите первый параметр!"  [defaultValue]="iter[(keysArray$ | async)[0]]" (input)="inputHandler($event, iter.id)" />
+                  </ng-template>
+            <td *ngIf="(keysArray$ | async)[1] !== undefined"><a *ngIf="iter[(keysArray$ | async)[1]] !== '' && (editingOne$ | async) !== iter.id; else insertProp2">{{ iter[(keysArray$ | async)[1]] }}</a></td>
+                  <ng-template #insertProp2>
+                    <input [ngClass]="{'invalid': secondInput === '' || secondInput === undefined}" id="input2" required placeholder="Введите второй параметр!"  [defaultValue]="iter[(keysArray$ | async)[1]]" (input)="inputHandler($event, iter.id)" />
+                  </ng-template>
+            <td *ngIf="(keysArray$ | async)[2] !== undefined"><a *ngIf="iter[(keysArray$ | async)[2]] !== '' && (editingOne$ | async) !== iter.id; else insertProp3">{{ iter[(keysArray$ | async)[2]] }}</a></td>
+                  <ng-template #insertProp3>
+                    <input [ngClass]="{'invalid': thirdInput === '' || thirdInput === undefined}" id="input3" required placeholder="Введите третий параметр!"  [defaultValue]="iter[(keysArray$ | async)[2]]" (input)="inputHandler($event, iter.id)" />
+                  </ng-template>
+            <td *ngIf="(keysArray$ | async)[3] !== undefined"><a *ngIf="iter[(keysArray$ | async)[3]] !== '' && (editingOne$ | async) !== iter.id; else insertProp4">{{ iter[(keysArray$ | async)[3]] }}</a></td>
+                  <ng-template #insertProp4>
+                    <input [ngClass]="{'invalid': fourthInput === '' || fourthInput === undefined}" id="input4" required placeholder="Введите четвёртый параметр!"  [defaultValue]="iter[(keysArray$ | async)[3]]" (input)="inputHandler($event, iter.id)" />
+                  </ng-template>
+            <td *ngIf="(keysArray$ | async)[4] !== undefined"><a *ngIf="iter[(keysArray$ | async)[4]] !== '' && (editingOne$ | async) !== iter.id; else insertProp5">{{ iter[(keysArray$ | async)[4]] }}</a></td>
+                  <ng-template #insertProp5>
+                    <input [ngClass]="{'invalid': fifthInput === '' || fifthInput === undefined}" id="input5" required placeholder="Введите пятый параметр!"  [defaultValue]="iter[(keysArray$ | async)[4]]" (input)="inputHandler($event, iter.id)" />
+                  </ng-template>
+            <td *ngIf="(keysArray$ | async)[5] !== undefined"><a *ngIf="iter[(keysArray$ | async)[5]] !== '' && (editingOne$ | async) !== iter.id; else insertProp6">{{ iter[(keysArray$ | async)[5]] }}</a></td>
+                  <ng-template #insertProp6>
+                    <input [ngClass]="{'invalid': sixthInput === '' || sixthInput === undefined}" id="input6" required placeholder="Введите шестой параметр!"  [defaultValue]="iter[(keysArray$ | async)[5]]" (input)="inputHandler($event, iter.id)" />
+                  </ng-template>
+
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div class="buttons">
+  <button 
+    [disabled]="(insert$ | async).length === 0 || added === true"
+    class="btn btn-success"
+    (click)="addOne()"
+    >Добавить
+  </button>
+  <button 
+    [disabled]="(insert$ | async).length === 0 || (choosen$ | async) === 0 || added === true" 
+    class="btn btn-primary" 
+    (click)="editOne()"
+    >Редактировать
+  </button>
+  <button [disabled]="added === false " class="btn btn-success" (click)="insertValues()">Сохранить</button>
+  <button 
+    [disabled]="(insert$ | async).length === 0 || (choosen$ | async) === 0 || added === true"
+    class="btn btn-danger"
+    (click)="removeOne()"
+    >Удалить
+  </button>
+</div>
+
+
+
+<!-- 
+<tr *ngFor="let iter of insert$ | async" [ngClass]="{
+  'table-primary': iter.id === (choosen$ | async)
+}" (click)="(chooseOne(iter.id))">
+  <th scope="row">{{ iter.id }}</th>
+  <td><a *ngIf="iter.name !== '' && (editingOne$ | async) !== iter.id; else insertName">{{ iter.name}}</a></td>
+  <ng-template #insertName>
+    <input required placeholder="Введите имя!" autofocus [defaultValue]="iter.name"
+      (input)="nameInputHandler($event)" />
+  </ng-template>
+  <td><a *ngIf="iter.year !== '' && (editingOne$ | async) !== iter.id; else insertYear">{{ iter.year }}</a></td>
+  <ng-template #insertYear>
+    <input required placeholder="Введите год!" [defaultValue]="iter.year" (input)="yearInputHandler($event)" />
+    <button class="btn btn-success btn-sm pdl-10" (click)="insertValues(iter.id)">Сохранить</button>
+  </ng-template>
+</tr> -->
+

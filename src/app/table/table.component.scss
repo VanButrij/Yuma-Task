@@ -1,0 +1,39 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+
+    @media screen and (max-width: 450px){
+        align-items: space-around;
+        justify-items: center;
+        flex-flow: column wrap;
+        height: 20vh;
+        button {
+            width: 40vw;
+        }
+    }
+}
+.wrapper {
+    max-height: 40vh;
+    overflow-y: auto;
+
+    .main-table {
+        max-height: inherit;
+
+        .invalid {
+            border: 2px solid red;
+        }
+    }
+}
+
+.tablePrimary {
+    background-color: rgb(159, 146, 219);
+}
+
+.table-wrapper {
+    width: 100%;
+}
+
+
+

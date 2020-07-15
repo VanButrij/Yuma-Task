@@ -1,0 +1,39 @@
+.root {
+    background: #f8f8f8;
+    height: 100vh;
+}
+
+header {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+    div {
+        display: flex;
+        justify-content: center;
+
+        @media screen and (max-width: 412px){
+            width: 70%;
+        }
+    }
+
+}
+
+.wrapper {
+    margin-top: 10vh;
+}
+
+
+
+.input, .output {
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+   
+    margin-bottom: 5vh;
+}
+
+.output {
+    margin-top: 5vh;
+}

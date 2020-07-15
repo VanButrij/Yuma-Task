@@ -1,0 +1,22 @@
+.insert {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40vw;
+
+    @media screen and (max-width: 1000px ) {
+        flex-direction: column;
+        align-content: space-around;
+        height: 27vh;
+    }
+
+    // .btn-custom  {
+        
+    //     @media screen and (max-width: 1000px) {
+    //         width: 150px;
+    //     }
+    // }
+}
+textarea {
+    max-height: 7vh;
+}

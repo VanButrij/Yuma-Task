@@ -1,0 +1,27 @@
+<div class="insert">
+    <textarea
+        id="outputArea"
+        readonly
+        >{{ download$ | async}}
+    </textarea>
+    <button 
+        [disabled]="(insert$ | async).length === 0"
+        class="btn btn-primary" 
+        (click)="downloadArray()"
+        >Выгрузить
+    </button>
+    <button 
+        [disabled]="(download$ | async).length === 0"
+        (click)="saveToFile()"
+        class="btn btn-primary" 
+        >Сохранить в .txt
+    </button>
+    <button 
+        [disabled]="(download$ | async).length === 0"
+        (click)="saveToCSV()"
+        class="btn btn-primary" 
+        >Сохранить в .csv
+</button>
+</div>
+
+<!-- [{"name":"Name 1","year":"2010"},{"name":"Name 2","year":"1997"},{"name":"Name 3","year":"2004"}] -->

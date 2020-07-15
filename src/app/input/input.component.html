@@ -1,0 +1,15 @@
+ <div class="insert" *ngIf="insertMethod === true; else fileInput">
+        <textarea  (input)="inputHandler($event)" id="inputArea">
+        </textarea>
+        <button [disabled]="!input" class="btn btn-primary" (click)="uploadHandler()">Загрузить</button>
+        <button class="btn btn-primary" (click)="changeMethod()">Из Файла</button>
+    </div>
+   
+<ng-template #fileInput>
+    <div class="insert">
+        <input id="inputFile" type="file" accept="text/plain" (change)="readFile($event)"/>
+        <button [disabled]="!inputFile" class="btn btn-primary" (click)="uploadHandler()">Загрузить</button>
+        <button class="btn btn-primary" (click)="changeMethod()">Из Строки</button>
+    </div>
+</ng-template>        
+
