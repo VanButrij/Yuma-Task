@@ -10,6 +10,12 @@
   * Добавление, редактирование и удаление элементов
   * Выгрузка в качестве строки/txt/csv документа
   
+Несколько скриншотов:
+
+![initial](https://github.com/VanButrij/Yuma-Task/blob/master/img/initial.png)
+
+![upload](https://github.com/VanButrij/Yuma-Task/blob/master/img/loaded.png)
+
 
 
 # Yuma
