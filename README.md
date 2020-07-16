@@ -1,4 +1,24 @@
-# Youma
+# Тестовое приложение для компании "Yumasoft"
+
+## JSON редактор
+
+Редактор написан на Angular 10, стилизация компонентов выполнена с использованием Bootstrap 4
+
+* В приложении реализовано:
+  * Возможность добавлять JSON из строки/txt/csv документа
+  * Вывод JSON в виде таблицы
+  * Добавление, редактирование и удаление элементов
+  * Выгрузка в качестве строки/txt/csv документа
+  
+Несколько скриншотов:
+
+![initial](https://github.com/VanButrij/Yuma-Task/blob/master/img/initial.png)
+
+![upload](https://github.com/VanButrij/Yuma-Task/blob/master/img/loaded.png)
+
+
+
+# Yuma
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
 
