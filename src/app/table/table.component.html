@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <table class="table table-striped table-bordered main-table table-hover">
+    <table *ngIf="(insert$ | async).length !== 0; else noObjects" class="table table-striped table-bordered main-table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -61,6 +61,10 @@
     >Удалить
   </button>
 </div>
+
+<ng-template #noObjects>
+    <div class="noObjects"><p><b>Нет загруженных данных!</b></p></div>
+</ng-template>
 
 
 

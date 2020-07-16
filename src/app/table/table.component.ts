@@ -42,14 +42,18 @@ export class TableComponent implements OnInit {
 
   public choosen: number;
 
+  public editingOne: number;
+
   constructor(private store$: Store<InsertState>) {
 
   }
 
   ngOnInit(): void {
-    this.insert$.pipe().subscribe(event => this.insert = event)
+    this.insert$.pipe().subscribe(event => this.insert = event);
     this.keysArray$.pipe().subscribe(event => this.keysArray = event);
     this.addedOne$.pipe().subscribe(event => this.added = event);
+    this.editingOne$.pipe().subscribe(event => this.editingOne = event);
+
   }
 
   inputHandler(event, iterId): void {
@@ -90,11 +94,19 @@ export class TableComponent implements OnInit {
     }
   }
 
-  validatorRequired(value) {
+  validatorRequired(value): void {
     const control = new FormControl(value, Validators.required);
-    if (control.errors === null || control.pristine === false || control.value !== null) {
-      this.numOfInputs += 1;
+    debugger;
+    if (this.editingOne !== 0) {
+       if (control.errors === null || control.pristine !== false || control.value !== null) {
+       this.numOfInputs += 1;
+       }
+    } else {
+        if (control.errors === null) {
+        this.numOfInputs += 1;
+       }
     }
+
   }
 
   insertValues(): void {

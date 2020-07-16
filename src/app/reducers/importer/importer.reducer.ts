@@ -11,6 +11,16 @@ export interface InsertState {
     addedOne: boolean;
 }
 
+export interface State {
+    array: Array<object>;
+    keysArray: Array<string>;
+    choosen: number;
+    download: string;
+    editingOne: number;
+    addedOne: boolean;
+    id: number;
+}
+
 const initialState: InsertState = {
     array: [
 
@@ -26,16 +36,19 @@ export const insertReducer =  (state = initialState, action: InsertActions) => {
     switch (action.type) {
         case insertActionsType.upload: {
             const newKeysArray = [];
-            for (let key in action.payload[0]) {
-                newKeysArray.push(key);
+            for (const key in action.payload[0]) {
+                if (key) {
+                    newKeysArray.push(key);
+                }
+
             }
             let i = 1;
             const payloadId = action.payload.map(s => {
-                const sCopy = {...s};
-                sCopy.id = i;
                 i++;
-                return sCopy;
-
+                return {
+                    ...s,
+                    id: i - 1,
+                };
             });
             return {
                 ...state,
@@ -48,8 +61,8 @@ export const insertReducer =  (state = initialState, action: InsertActions) => {
         }
 
         case insertActionsType.download: {
-            const removeId = state.array.map(s => {
-                const sCopy = {...s};
+            const removeId = state.array.map((s: State) => {
+                const sCopy: State = {...s};
                 delete sCopy.id;
                 return sCopy;
             });
@@ -79,22 +92,23 @@ export const insertReducer =  (state = initialState, action: InsertActions) => {
                 id: stateCopy.array.length + 1
             };
             stateCopy.array.push(newObject);
-            stateCopy.addedOne = true
+            stateCopy.addedOne = true;
             return stateCopy;
         }
 
         case insertActionsType.remove: {
             const stateCopy = {...state};
-            stateCopy.array = state.array.filter(s => {
+            stateCopy.array = state.array.filter((s: State) => {
                 return s.id !== stateCopy.choosen;
             });
             stateCopy.choosen = 0;
             let i = 1;
             stateCopy.array = stateCopy.array.map(s => {
-                const sCopy = {...s};
-                sCopy.id = i;
                 i++;
-                return sCopy;
+                return {
+                    ...s,
+                    id: i - 1
+                };
 
             });
             return stateCopy;
@@ -110,7 +124,7 @@ export const insertReducer =  (state = initialState, action: InsertActions) => {
         case insertActionsType.setValues: {
             const stateCopy = {...state};
             stateCopy.array = [...state.array];
-            stateCopy.array = stateCopy.array.map(s => {
+            stateCopy.array = stateCopy.array.map((s: State) => {
                 const sCopy = {...s};
                 if (sCopy.id === action.id) {
                     if (action.firstInput !== undefined && action.firstInput !== '') {
@@ -151,13 +165,3 @@ export const insertReducer =  (state = initialState, action: InsertActions) => {
     }
 };
 
-// [{"name":"Name 1","year":"2010"},
-// {"name":"Name 2","year":"1997"},
-// {"name":"Name 3","year":"2004"}]
-
-
-
-// {
-//     ...stateCopy.array[0],
-//     id: stateCopy.array.length + 1,
-// }

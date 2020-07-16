@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
@@ -30,6 +31,7 @@ export class InputComponent implements OnInit {
 
  public insertNew: any;
 
+
   ngOnInit(): void {
 
   }
@@ -41,24 +43,25 @@ export class InputComponent implements OnInit {
   }
 
   readFile(input): void {
-    let file = input.target.files[0];
+    const file = input.target.files[0];
     if (file.type === 'text/plain') {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = () => {
-        this.input = reader.result;
+        this.input = reader.result.toString();
         this.inputFile = true;
-      }
+      };
       reader.onerror = () => {
         alert('Ошибка чтения файла!');
-      }
+      };
     } else if (file.type === 'application/vnd.ms-excel') {
       try {
         this.ngxCsvParser.parse(file, { header: true}).pipe().subscribe(event => {
           this.input = JSON.stringify(event);
-          this.inputFile = true ;})
+          this.inputFile = true ;
+        });
       } catch (error) {
-        alert('Ошибка чтения файла!')
+        alert('Ошибка чтения файла!');
       }
     }
   }
@@ -72,20 +75,18 @@ export class InputComponent implements OnInit {
       this.insertNew = JSON.parse(this.input);
     } catch (error) {
       alert('Введенная строка не является JSON!');
-      
     }
-    
     try {
       let counter = 0;
-      for (let key in this.insertNew[0]) {
-        counter++;
+      for (const key in this.insertNew[0]) {
+        if (key) {
+          counter++;
+        }
       }
       if (counter > 6) {
         throw new Error('Не более 6 свойств!');
-      } else { 
+      } else {
         this.store$.dispatch(new InsertUploadAction(this.insertNew));
-        if (document.querySelector('#inputArea'))
-        {document.querySelector('#inputArea').value = '';}
         this.input = '';
       }
 
@@ -96,27 +97,3 @@ export class InputComponent implements OnInit {
   }
 }
 
-// [{
-//   "date":"05.03.1999",
-//   "road":"open",
-//   "exit":"Over the third floor",
-//   "dater":"05.03.1999",
-//   "roadr":"open",
-//   "exitr":"Over the third floor"
-// },
-// {
-//   "date":"07.10.1999",
-//   "road":"close",
-//   "exit":"Over the third floor",
-//   "dater":"05.03.1999",
-//   "roadr":"open",
-//   "exitr":"Over the third floor"
-// },
-// {
-//   "date":"13.08.2001",
-//   "road":"warn",
-//   "exit":"now",
-//   "dater":"05.03.1999",
-//   "roadr":"open",
-//   "exitr":"Over the third floor"
-// }]

@@ -12,12 +12,12 @@ export enum insertActionsType {
 
 export class InsertUploadAction implements Action {
     readonly type = insertActionsType.upload;
-    constructor(public payload: {insertOne: Array<object>}) {}
+    constructor(public payload: Array<object>) {}
 }
 
 export class InsertChooseAction implements Action {
     readonly type = insertActionsType.choose;
-    constructor(public payload: {choosen: number}) {}
+    constructor(public payload: number) {}
 }
 
 export class InsertAddNewAction implements Action {
@@ -38,13 +38,13 @@ export class InsertDownloadAction implements Action {
 
 export class InsertSetValuesAction implements Action {
     readonly type = insertActionsType.setValues;
-    constructor(public firstInput: {firstInput: string},
-                public secondInput: {secondInput: string},
-                public thirdInput: {thirdInput: string},
-                public fourthInput: {fourthInput: string},
-                public fifthInput: {fifthInput: string},
-                public sixthInput: {sixthInput: string},
-                public id: {iterId: number}) {}
+    constructor(public firstInput: string,
+                public secondInput: string,
+                public thirdInput: string,
+                public fourthInput: string,
+                public fifthInput: string,
+                public sixthInput: string,
+                public id: number) {}
 }
 
 export type InsertActions = InsertUploadAction
